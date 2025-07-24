@@ -3,13 +3,6 @@
   "name": "backend",
   "main": "src/index.ts",
   "compatibility_date": "2025-07-23",
-  "env": {
-    "production":{
-        "vars": {
-          "DATABASE_URL": "prisma://accelerate.prisma-data.net/?api_key=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqd3RfaWQiOjEsInNlY3VyZV9rZXkiOiJza19aX0x0SVRhaWF3MVRyVEx5RDlPd1giLCJhcGlfa2V5IjoiMDFLMFkzUkM3QTdKUTIzREYyMTQ1UEFRUzkiLCJ0ZW5hbnRfaWQiOiJjZDk0NTViODU2MThjOTgwM2Y4MWEzZjZlZjZiOWNkMzM3ZWE0ZWRlYWNiY2FhYjNiYTFmMmVlNjdlMWRiYmVmIiwiaW50ZXJuYWxfc2VjcmV0IjoiOGYxN2FjYzItOWJlNi00NWU5LWI2MzUtNmJhZWI5ZTM2MjQ0In0.UuGvLbNI62dUes9sA0KxjxreOd7585CXuSk-68X6YI4"
-          }
-        }
-    },
   
   // "compatibility_flags": [
   //   "nodejs_compat"
