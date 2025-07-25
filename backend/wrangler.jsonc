@@ -3,7 +3,10 @@
   "name": "backend",
   "main": "src/index.ts",
   "compatibility_date": "2025-07-23",
-  
+  "vars": {
+    "DATABASE_URL": "env:DATABASE_URL"
+  }
+
   // "compatibility_flags": [
   //   "nodejs_compat"
   // ],
