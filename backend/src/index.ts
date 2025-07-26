@@ -8,30 +8,40 @@ type Env = {
     DATABASE_URL: string
   }
   Variables: {
-    prisma: ReturnType<typeof extendedPrisma>
+    prisma: PrismaClient
   }
 }
 
-const extendedPrisma = () =>
-  new PrismaClient({ datasourceUrl: '' }).$extends(withAccelerate())
 
 const app = new Hono<Env>()
-
 app.use('*', async (c, next) => {
+
+  console.log(c.env.DATABASE_URL);
   const prisma = new PrismaClient({
     datasourceUrl: c.env.DATABASE_URL,
   }).$extends(withAccelerate())
 
-  c.set('prisma', prisma)
+  c.set('prisma', prisma as unknown as PrismaClient)
   await next()
 })
-
 
 app.post('/api/v1/signup', async (c) => {
   const body = await c.req.json();
   const prisma = c.get("prisma");
-  try{
-    const data = await prisma.user.create
+  
+  try {
+  
+    const user = await prisma.user.create({
+      data:{
+        email: body.email,
+        name: body.name,
+        password: body.password
+      }
+    })
+
+  }catch(e){
+    console.log(e);
+    console.log("Inside catch");
   }
 
   return c.text('Signup Route');
