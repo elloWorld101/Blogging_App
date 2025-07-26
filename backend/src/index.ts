@@ -16,7 +16,6 @@ type Env = {
 const app = new Hono<Env>()
 app.use('*', async (c, next) => {
 
-  console.log(c.env.DATABASE_URL);
   const prisma = new PrismaClient({
     datasourceUrl: c.env.DATABASE_URL,
   }).$extends(withAccelerate())
@@ -30,21 +29,29 @@ app.post('/api/v1/signup', async (c) => {
   const prisma = c.get("prisma");
   
   try {
-  
+
     const user = await prisma.user.create({
       data:{
         email: body.email,
         name: body.name,
         password: body.password
-      }
+      }      
     })
 
+    if(user){
+      return c.json({
+        msg: "User created"
+      });
+    }
+    
   }catch(e){
-    console.log(e);
-    console.log("Inside catch");
+    return c.json({
+      msg: "User not created",
+      error: e
+    })
   }
 
-  return c.text('Signup Route');
+
 })
 
 app.post("/api/v1/signin", (c)=>{
