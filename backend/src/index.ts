@@ -15,6 +15,7 @@ type Env = {
 }
 
 
+
 const app = new Hono<Env>()
 app.use('*', async (c, next) => {
 
@@ -55,10 +56,10 @@ app.post('/api/v1/signup', async (c) => {
     }
 
 
-  }catch(e){
+  }catch(error){
     return c.json({
       msg: "User not created",
-      error: e
+      error: error
     })
   }
 
@@ -66,8 +67,44 @@ app.post('/api/v1/signup', async (c) => {
 })
 
 app.post("/api/v1/signin", async (c)=>{
+  const body = await c.req.json()
+  const prisma = c.get("prisma");
+  const JWT_SECRET = c.env.JWT_SECRET;
 
-    return c.text("Signin Route");
+  try{
+    const user = await prisma.user.findUnique({
+      where: {
+        email: body.email
+      }
+    })
+
+    if(user){
+        const token = await sign({
+          id: user.id
+        }, JWT_SECRET)
+
+        if(token) {
+          return c.json({
+            msg: "Signin Successfull",
+            token: token
+          })
+        }else {
+          return c.json({
+            msg: "Token Not generated successfully"
+          })
+        }
+    }else {
+        return c.json({
+          msg: "Signup first"
+        })
+      }
+
+  }catch(error){
+    return c.json({
+      msg: "Signin failed",
+      error: error
+    })
+  }
 
 
 })
