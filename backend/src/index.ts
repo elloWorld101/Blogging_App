@@ -2,6 +2,7 @@ import { Hono } from 'hono'
 import { PrismaClient } from '@prisma/client/edge'
 import { withAccelerate } from '@prisma/extension-accelerate'
 import { decode, sign, verify } from 'hono/jwt'
+import { JWTPayload } from 'hono/utils/jwt/types'
 
 
 type Env = {
@@ -11,6 +12,7 @@ type Env = {
   }
   Variables: {
     prisma: PrismaClient
+    userId: JWTPayload
   }
 }
 
@@ -40,7 +42,7 @@ app.use("/api/v1/blog/*", async (c, next) =>{
     const decoded = await verify(safeToken, JWT_SECRET);
     if(decoded){
       
-      console.log(decoded);
+      c.set("userId", decoded);
       await next();
 
     }else{
@@ -160,6 +162,7 @@ app.post("/api/v1/signin", async (c)=>{
 })
 
 app.post("/api/v1/blog", (c)=>{
+  const userId = c.get("userId").id;
   return c.text("Blog Post")
 })
 
