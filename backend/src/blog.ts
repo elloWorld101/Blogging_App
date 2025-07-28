@@ -11,7 +11,8 @@ type Env = {
   }
   Variables: {
     prisma: PrismaClient
-    userId: JWTPayload
+    decoded: JWTPayload
+
   }
 }
 
@@ -40,7 +41,7 @@ blogRoutes.use("*", async (c, next) =>{
     const decoded = await verify(safeToken, JWT_SECRET);
     if(decoded){
 
-        c.set("userId", decoded);    
+        c.set("decoded", decoded);    
         await next();
 
     }else{
@@ -61,12 +62,39 @@ blogRoutes.use("*", async (c, next) =>{
 
 //Routes
 
-blogRoutes.post("/blog", (c)=>{
-    const payload = c.get("userId");
+blogRoutes.post("/blog", async (c)=>{
+    const payload = c.get("decoded");
     const userId = payload.id;
-    console.log(userId);
+    const body = await c.req.json();
+    const prisma = c.get("prisma");
 
-    return c.text("Blog Post")
+    if(typeof userId != "string"){
+        throw new Error("UserId not a string")
+    }
+
+    try{
+        const post = await prisma.post.create({
+        data: {
+            title: body.title,
+            content: body.content,
+            authorId: userId 
+            }
+        })
+
+        if(post){
+            return c.json({
+                msg: "Post successfully created"
+            })
+        }
+
+    } catch(error) {
+        return c.json({
+            msg: "Error found in blog post route",
+            error: error
+        })
+    }
+    
+
 })
 
 blogRoutes.put("/blog", (c)=>{
