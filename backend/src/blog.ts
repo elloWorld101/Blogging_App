@@ -131,14 +131,57 @@ blogRoutes.put("/blog", async (c)=>{
 
 })
 
-blogRoutes.get("/blog/bulk", (c)=>{
-  return c.text("Blog Bulk");
+blogRoutes.get("/blog/bulk", async (c)=>{
+    const prisma = c.get("prisma");
+    // const payload = c.get("decoded");
+    // const userId = payload.id
+
+    try {
+        // const posts = await prisma.post.findMany({
+        //     where: {
+        //     authorId: userId as string
+        //     }
+        // })
+
+        const posts = await prisma.post.findMany({})
+        if(posts){
+            return c.json({
+                msg: "Posts:", posts
+            })
+        }
+    } catch(error){
+        return c.json({
+            msg: "Error in Blog bulk route",
+            error: error
+        })
+    }
+
 })
 
-blogRoutes.get("/blog/:id", (c)=>{
-  const id = c.req.param("id");
-  console.log(id);
-  return c.text("Blog with Route param");
+blogRoutes.get("/blog/:id", async (c)=>{
+    const id = c.req.param("id");
+    const prisma = c.get("prisma");
+
+    try {
+        const specificRoute = await prisma.post.findUnique({
+            where:{
+                id: id
+            }
+        })
+
+        if(specificRoute){
+            return c.json({
+                msg: "Post:", specificRoute
+            })
+        }
+
+    } catch(error) {
+        return c.json({
+            msg: "Error inside blog route parameter",
+            error: error
+        }) 
+    }
+  
 })
 
 
