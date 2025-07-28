@@ -97,8 +97,38 @@ blogRoutes.post("/blog", async (c)=>{
 
 })
 
-blogRoutes.put("/blog", (c)=>{
-  return c.text("Blog Put");
+blogRoutes.put("/blog", async (c)=>{
+    const body = await c.req.json();
+    const prisma = c.get("prisma");
+    const payload = c.get("decoded");
+    const userId = payload.id;
+
+    try {
+
+        const updatedPost = await prisma.post.update({
+            where: {
+                id: body.id
+            },
+            data: {
+                title: body.title,
+                content: body.content,
+                authorId: userId as string
+            }
+        })
+
+        if(updatedPost){
+            return c.json({
+                msg: "Post updated successfully"
+            })
+        }
+
+    } catch(error) {
+        return c.json({
+            msg: "Error inside Blog put route",
+            error: error
+        })
+    }
+
 })
 
 blogRoutes.get("/blog/bulk", (c)=>{
