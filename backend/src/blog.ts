@@ -3,6 +3,7 @@ import { PrismaClient } from '@prisma/client/edge'
 import { withAccelerate } from '@prisma/extension-accelerate'
 import { decode, sign, verify } from 'hono/jwt'
 import { JWTPayload } from 'hono/utils/jwt/types'
+import { createPostInput, updatePostInput } from "@ritzcreates/common-app"
 
 type Env = {
   Bindings: {
@@ -72,6 +73,14 @@ blogRoutes.post("/blog", async (c)=>{
         throw new Error("UserId not a string")
     }
 
+    const { success } = createPostInput.safeParse(body);
+    if(!success){
+        c.status(400);
+        return c.json({
+            msg: "Wrong inputs";
+        })
+    }
+
     try{
         const post = await prisma.post.create({
         data: {
@@ -102,6 +111,14 @@ blogRoutes.put("/blog", async (c)=>{
     const prisma = c.get("prisma");
     const payload = c.get("decoded");
     const userId = payload.id;
+
+    const { success } = createPostInput.safeParse(body);
+    if(!success){
+        c.status(400);
+        return c.json({
+            msg: "Wrong inputs";
+        })
+    }
 
     try {
 
