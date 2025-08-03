@@ -3,6 +3,7 @@ import { PrismaClient } from '@prisma/client/edge'
 import { withAccelerate } from '@prisma/extension-accelerate'
 import { sign } from 'hono/jwt'
 import { JWTPayload } from 'hono/utils/jwt/types'
+import  { signinInput, signupInput }  from "@ritzcreates/common-app"
 
 type Env = {
   Bindings: {
@@ -35,9 +36,16 @@ userRoutes.post('/signup', async (c) => {
     const body = await c.req.json();
     const JWT_SECRET = c.env.JWT_SECRET;
     const prisma = c.get("prisma");
-    
-    try {
 
+    const { success } = signupInput.safeParse(body);
+    if(!success){
+        c.status(400);
+        return c.json({
+            msg: "Wrong inputs bro"
+        })
+    }
+
+    try {
         const user = await prisma.user.create({
         data:{
             email: body.email,
@@ -51,24 +59,20 @@ userRoutes.post('/signup', async (c) => {
             id: user.id
         }, JWT_SECRET);
 
-        if(token){
-            
+        if(token){  
             return c.json({
             msg: "User created",
             token: token
-            })
-        
+            })  
         }
         }
 
 
     }catch(error){
-        
         return c.json({
         msg: "User not created",
         error: error
         })
-    
     }
 
 
@@ -77,9 +81,15 @@ userRoutes.post('/signup', async (c) => {
 userRoutes.post("/signin", async (c)=>{
 
     const body = await c.req.json()
-    const prisma = c.get("prisma");
-    
+    const prisma = c.get("prisma");  
     const JWT_SECRET = c.env.JWT_SECRET;
+    const { success } = signinInput.safeParse(body);
+    if(!success){
+        c.status(400);
+        return c.json({
+            msg: "Wrong Inputs"
+        })
+    }
 
     try{
         
@@ -90,7 +100,6 @@ userRoutes.post("/signin", async (c)=>{
         })
 
         if(user){
-            
             const token = await sign({
             id: user.id
             }, JWT_SECRET)
