@@ -1,3 +1,5 @@
+import image from "../assets/mediumImage.jpg"
+
 export function Landing(){
     return(
         <div className="h-screen bg-[#F7F4ED]">
@@ -10,10 +12,15 @@ export function Landing(){
             </div>
 
             <div>
-                <h2>Human stories & ideas</h2>
-                <p>A place to read, write, and deepen your understanding</p>
-                <a href="/signup">Start Reading</a>
-                <img src="" alt="" />
+                <div>
+                    <h2>Human stories & ideas</h2>
+                    <p>A place to read, write, and deepen your understanding</p>
+                    <a href="/signup">Start Reading</a>
+                </div>
+                <div>
+                    <img src={image} alt="" />
+                </div>
+                
             </div>
         </div>
     )
