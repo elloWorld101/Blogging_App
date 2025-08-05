@@ -2,7 +2,7 @@ import image from "../assets/mediumImage.jpg"
 
 export function Landing(){
     return(
-        <div className="h-screen bg-[#F7F4ED]">
+        <div className="h-screen bg-[#F7F4ED] flex flex-col">
             
             <div className="flex flex-row justify-between py-5">
                 <div className="md:basis-2/3 mx-[5%]">
@@ -18,7 +18,7 @@ export function Landing(){
                 </div>
             </div>
 
-            <div className="flex justify-between border-1 items-center flex-row h-screen md:h-auto"> 
+            <div className="flex justify-between border-1 items-center flex-row  md:h-auto flex-1 md:flex-0"> 
                 <div className="mt-5 font-domine mx-[5%] basis-2/3">
                     <h2 className= "text-7xl md:text-9xl" >Human <br /> stories & ideas</h2>
                     <p className="text-xl mt-7 font-roboto">A place to read, write, and deepen your understanding</p>
