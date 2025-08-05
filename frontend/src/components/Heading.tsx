@@ -7,9 +7,9 @@ interface HeadingTypes{
 
 export function Heading({heading, subheading, link, page}: HeadingTypes){
     return(
-        <div className="text-center">
-            <h2 className="font-bold text-3xl">{heading}</h2>
-            <p className="text-gray-600 pt-1">{subheading} <a href={page} className="underline">{link}</a></p>
+        <div className="text-center  md:pt-0">
+            <h2 className="font-bold md:text-3xl text-2xl">{heading}</h2>
+            <p className="text-gray-600 pt-1 md:text-base text-xs">{subheading} <a href={page} className="underline">{link}</a></p>
         </div>
     )
 }

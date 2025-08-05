@@ -5,12 +5,12 @@ import { Heading } from "../components/Heading"
 
 export function Signup(){
     return(
-        <div className="flex h-screen "> 
+        <div className="md:flex h-screen md:bg-white bg-gray-200"> 
             
-            <div className="basis-1/2  flex flex-col justify-center">
-                <div className=" w-[50%] mx-auto">
+            <div className="md:basis-1/2 flex flex-col justify-center h-screen">
+                <div className=" md:w-[50%] mx-auto ">
                     <Heading heading="Create an account" subheading="Already have an account? " link="Login" page="/signin"/>
-                    <InputBox title="Username" placeholder="Enter your username" />
+                    <InputBox title="Username" placeholder="Rithvik" />
                     <InputBox title="Email" placeholder="m@example.com" />
                     <InputBox title="Password" placeholder="" />
                 
@@ -18,7 +18,7 @@ export function Signup(){
                 </div>
             </div>
 
-            <div className="bg-gray-200 basis-1/2 flex flex-col justify-center">
+            <div className="hidden md:block md:bg-gray-200 md:basis-1/2 md:flex flex-col flex-1 md:justify-center">
                 <div className=" px-[15%]">
                     <SideBar heading='"The customer service I recieved was exceptional. The support team went above and beyond to address my concerns."'  subheading="Jules Winnfield" footer = "CEO, Acme Inc"/>
                 </div>
