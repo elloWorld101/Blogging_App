@@ -8,7 +8,7 @@ export function Signup(){
         <div className="md:flex h-screen md:bg-white bg-gray-200"> 
             
             <div className="md:basis-1/2 flex flex-col justify-center h-screen">
-                <div className=" md:w-[50%] mx-auto ">
+                <div className=" md:w-[50%] mx-auto w-[70%]">
                     <Heading heading="Create an account" subheading="Already have an account? " link="Login" page="/signin"/>
                     <InputBox title="Username" placeholder="Rithvik" />
                     <InputBox title="Email" placeholder="m@example.com" />
