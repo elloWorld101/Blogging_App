@@ -24,7 +24,7 @@ export function Blogs(){
                     </div>
                 </div>
 
-                <div className="flex mt-[4%] md:w-[80%] m-auto ">
+                <div className="flex mt-[15%] md:mt-[4%] md:w-[80%] m-auto ">
                     <div className="hidden md:block md:basis-1/15"><Svg/></div>
                     <div className="md:basis-14/15 md:border-l border-neutral-500 rounded-none w-full"><Title/></div>
                 </div>
