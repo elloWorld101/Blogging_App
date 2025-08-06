@@ -1,4 +1,5 @@
 import image from "../assets/mediumImage.jpg"
+import { Logo } from "../components/Logo"
 
 export function Landing(){
     return(
@@ -6,7 +7,7 @@ export function Landing(){
             
             <div className="flex flex-row justify-between py-5">
                 <div className="md:basis-2/3 mx-[5%]">
-                    <h2 className="text-2xl  md:text-3xl font-bold md:font-semibold">ManseLikh</h2>
+                    <Logo/>       
                 </div>
                 
                 
