@@ -14,7 +14,7 @@ model User {
   email     String @unique
   name      String?
   password  String
-  posts     Post[]
+  posts     Post[] //this will have an array of Post 
 }
 
 model Post {
@@ -22,7 +22,7 @@ model Post {
   title       String
   content     String
   published   Boolean @default(false)
-  author      User @relation(fields: [authorId], references: [id])
-  authorId    String
+  author      User @relation(fields: [authorId], references: [id]) //author which is a User and then relation
+  authorId    String //as uuid is a string
 }
 

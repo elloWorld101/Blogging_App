@@ -77,7 +77,7 @@ blogRoutes.post("/blog", async (c)=>{
     if(!success){
         c.status(400);
         return c.json({
-            msg: "Wrong inputs";
+            msg: "Wrong inputs"
         })
     }
 
@@ -116,7 +116,7 @@ blogRoutes.put("/blog", async (c)=>{
     if(!success){
         c.status(400);
         return c.json({
-            msg: "Wrong inputs";
+            msg: "Wrong inputs"
         })
     }
 
