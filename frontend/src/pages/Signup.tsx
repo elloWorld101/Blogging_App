@@ -1,29 +1,44 @@
+import { useState } from "react"
 import { InputBox } from "../components/InputBox"
 import { Button } from "../components/Button"
 import { SideBar } from "../components/SideBar"
 import { Heading } from "../components/Heading"
-import axios from "axios"
+import axios from "axios";
+const BASE_URL = import.meta.env.VITE_BACKEND_URL
 
 export function Signup(){
+    const [username, setUsername] = useState<string>("");
+    const [email, setEmail] = useState<string>("");
+    const [password, setPassword] = useState<string>("");
 
-    function signup(){
-        
+
+    function signup(): void{
+        console.log(username);
+        console.log(email);
+        console.log(password);
+
+        axios.post(`${BASE_URL}/signup`, {
+            name: username,
+            email: email,
+            password: password
+        })
+            .then(function(){
+                console.log("Promise resolved")
+            })
     }
-
 
 
     return(
         <div className="md:flex h-screen md:bg-white bg-gray-200"> 
 
-
             <div className="md:basis-1/2 flex flex-col justify-center h-screen">
                 <div className=" md:w-[50%] mx-auto w-[70%]">
                     <Heading heading="Create an account" subheading="Already have an account? " link="Login" page="/signin"/>
-                    <InputBox title="Username" placeholder="Rithvik" />
-                    <InputBox title="Email" placeholder="m@example.com" />
-                    <InputBox title="Password" placeholder="" />
+                    <InputBox title="Username" placeholder="Rithvik" setStateVariable = {setUsername} />
+                    <InputBox title="Email" placeholder="m@example.com" setStateVariable={setEmail} />
+                    <InputBox title="Password" placeholder="" setStateVariable={setPassword} />
 
-                    <Button content="Sign Up"></Button>
+                    <Button content="Sign Up" functionCalled={signup}></Button>
                 </div>
             </div>
 
