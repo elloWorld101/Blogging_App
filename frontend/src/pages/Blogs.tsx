@@ -15,7 +15,7 @@ export function Blogs(){
                 <div className="flex justify-between mt-[1%]"> 
                     <div className="flex items-center gap-2.5">
                         <Logo/>
-                        <Draft name="Rithvikbansal" />      
+                        <div className="hidden md:block"><Draft name="Rithvikbansal" /></div>
                     </div>
 
                     <div className="flex items-center gap-3">
@@ -24,14 +24,14 @@ export function Blogs(){
                     </div>
                 </div>
 
-                <div className="flex mt-[4%] w-[80%] m-auto ">
-                    <div className="basis-1/15"><Svg/></div>
-                    <div className="basis-14/15 border-l border-neutral-500 rounded-none w-full"><Title/></div>
+                <div className="flex mt-[4%] md:w-[80%] m-auto ">
+                    <div className="hidden md:block md:basis-1/15"><Svg/></div>
+                    <div className="md:basis-14/15 md:border-l border-neutral-500 rounded-none w-full"><Title/></div>
                 </div>
 
-                <div className="w-[80%] m-auto flex mt-[2%] ">
-                    <div className="basis-1/15"></div>
-                    <div className="basis-14/15 ">
+                <div className="md:w-[80%] m-auto flex mt-[2%] ">
+                    <div className="md:basis-1/15"></div>
+                    <div className="md:basis-14/15 ">
                         <Subtitle/>
                     </div>
                 </div>
