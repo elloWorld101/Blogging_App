@@ -27,6 +27,7 @@ export function Signup(){
         })
             .then(function(response){
                 setDisable(false);
+                
                 if(response.data.error){
                     alert(response.data.error);
                 }

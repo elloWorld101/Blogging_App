@@ -78,10 +78,13 @@ userRoutes.post("/signin", async (c) => {
   const body = await c.req.json();
   const prisma = c.get("prisma");
   const JWT_SECRET = c.env.JWT_SECRET;
-  const { success } = signinInput.safeParse(body);
-  if (!success) {
+
+  const result = signinInput.safeParse(body);
+  
+  if (!result.success) {
+
     return c.json({
-      msg: "Wrong Inputs",
+      msg: result.error.issues[0].message,
     });
   }
 
