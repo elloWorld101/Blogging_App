@@ -16,9 +16,6 @@ export function Signup(){
 
 
     function signup(): void{
-        console.log(username);
-        console.log(email);
-        console.log(password);
         
         setDisable(true);
 
@@ -27,8 +24,19 @@ export function Signup(){
             email: email,
             password: password
         })
-            .then(function(){
-                console.log("Promise resolved")
+            .then(function(response){
+                setDisable(false);
+                if(response.data.error){
+                    alert(response.data.error);
+                }
+                if(response.data.token){
+                    const token = response.data.token;
+                    localStorage.setItem('jwtToken', token)
+                }
+                const msg = response.data.msg;
+                alert(msg);
+            }).catch(error =>{
+                alert(error);   
             })
     }
 

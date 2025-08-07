@@ -33,16 +33,18 @@ userRoutes.use('*', async (c, next) => {
 //Routes
 
 userRoutes.post('/signup', async (c) => {
-    console.log("Hello from signup");
     const body = await c.req.json();
     const JWT_SECRET = c.env.JWT_SECRET;
     const prisma = c.get("prisma");
 
-    const { success } = signupInput.safeParse(body);
-    if(!success){
-        c.status(400);
+    const result = signupInput.safeParse(body);
+    console.log(result.error);
+    console.log(result);
+
+    if(!result.success){
+        console.log(result.error.issues);
         return c.json({
-            msg: "Wrong inputs bro"
+            msg: result.error.issues[0].message
         })
     }
 
