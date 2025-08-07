@@ -25,7 +25,7 @@ export function Signin(){
         
             }).then(function(response){
                 setDisable(false);
-                
+
                 if(response.data.error){
                     alert(response.data.error)
                 }
@@ -38,6 +38,8 @@ export function Signin(){
                 const msg = response.data.msg;
                 if(msg == "Signin Successfull"){
                     navigate("/dashboard");
+                }else{
+                    alert(msg);
                 }
 
             }).catch(error => {
