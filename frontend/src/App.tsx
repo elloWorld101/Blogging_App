@@ -16,8 +16,8 @@ function App() {
         <Route path='/' element={<Landing/>} ></Route>
         <Route path='/signup' element={<Signup/>}></Route>
         <Route path='/signin' element={<Signin/>}></Route>
-        <Route path='/blogs' element={<Blogs/>}></Route>
-        <Route path='/dashboard' element={<Dashboard/>}></Route>
+        <Route path='/post' element={<Blogs/>}></Route>
+        <Route path='/blogs' element={<Dashboard/>}></Route>
       </Routes>
     </RecoilRoot>
     </BrowserRouter>
