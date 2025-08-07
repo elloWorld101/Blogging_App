@@ -116,7 +116,7 @@ userRoutes.post("/signin", async (c) => {
       }
     } else {
       return c.json({
-        msg: "Signup first",
+        msg: "Incorrect Credentials",
       });
     }
   } catch (error) {
