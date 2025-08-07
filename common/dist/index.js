@@ -6,16 +6,16 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.updatePostInput = exports.createPostInput = exports.signinInput = exports.signupInput = void 0;
 const zod_1 = __importDefault(require("zod"));
 exports.signupInput = zod_1.default.object({
-    email: zod_1.default.email(),
-    password: zod_1.default.string(),
+    email: zod_1.default.email({ error: "Email required" }),
+    password: zod_1.default.string().min(3, { error: "Minimum length 3 required" }),
     name: zod_1.default.string().optional()
 });
 exports.signinInput = zod_1.default.object({
-    email: zod_1.default.email(),
+    email: zod_1.default.email({ error: "Email required" }),
     password: zod_1.default.string()
 });
 exports.createPostInput = zod_1.default.object({
-    title: zod_1.default.string(),
+    title: zod_1.default.string({ error: "Title required" }),
     content: zod_1.default.string(),
 });
 exports.updatePostInput = zod_1.default.object({

@@ -38,11 +38,8 @@ userRoutes.post('/signup', async (c) => {
     const prisma = c.get("prisma");
 
     const result = signupInput.safeParse(body);
-    console.log(result.error);
-    console.log(result);
-
+    
     if(!result.success){
-        console.log(result.error.issues);
         return c.json({
             msg: result.error.issues[0].message
         })
