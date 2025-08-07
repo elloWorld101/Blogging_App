@@ -14,7 +14,7 @@ export function InputBox({ title, placeholder, setStateVariable } : inputTypes){
                 const value = e.target.value;
                 setStateVariable(value);
             }}
-            className="border rounded-sm placeholder:text-gray-600 w-full md:py-1 outline-none md:pl-3 pl-1 "/>
+            className="border rounded-sm placeholder:text-gray-400 w-full md:py-1 outline-none md:pl-3 pl-1 "/>
         </div>
     )
 }

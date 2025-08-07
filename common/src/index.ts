@@ -1,7 +1,7 @@
 import zod from "zod"
 
 export const signupInput = zod.object({
-    email: zod.email({error: "Email required"}),
+    email: zod.email({error: "Wrong Email"}),
     password: zod.string().min(3,{error:"Minimum length 3 required"}),
 
     name: zod.string().optional()
@@ -11,7 +11,7 @@ export type SignupInput = zod.infer <typeof signupInput>;
 
 
 export const signinInput = zod.object({
-    email: zod.email({error: "Email required"}),
+    email: zod.email({error: "Wrong Email"}),
     password: zod.string()
 });
 
