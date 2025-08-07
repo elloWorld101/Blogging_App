@@ -4,18 +4,23 @@ import { Button } from "../components/Button"
 import { SideBar } from "../components/SideBar"
 import { Heading } from "../components/Heading"
 import axios from "axios";
+import { useSetRecoilState } from "recoil"
+import { disableAtom } from "../store/atom"
 const BASE_URL = import.meta.env.VITE_BACKEND_URL
 
 export function Signup(){
     const [username, setUsername] = useState<string>("");
     const [email, setEmail] = useState<string>("");
     const [password, setPassword] = useState<string>("");
+    const setDisable = useSetRecoilState(disableAtom)
 
 
     function signup(): void{
         console.log(username);
         console.log(email);
         console.log(password);
+        
+        setDisable(true);
 
         axios.post(`${BASE_URL}/signup`, {
             name: username,

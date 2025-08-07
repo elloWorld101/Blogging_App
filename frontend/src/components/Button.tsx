@@ -1,5 +1,6 @@
-import { useState } from "react"
 import { Spinner } from "./Spinner";
+import { useRecoilValue } from "recoil";
+import { disableAtom } from "../store/atom";
 
 interface ButtonTypes{
     content: string;
@@ -7,15 +8,15 @@ interface ButtonTypes{
 }
 
 export function Button({content, functionCalled} : ButtonTypes){
-    const [isdisable, SetIsdisable] = useState(false);
+    const isDisable = useRecoilValue(disableAtom)
 
 
 
     return (
         <div className="mt-4 ">
-            <button onClick={()=> functionCalled()} disabled={isdisable}
+            <button onClick={()=> functionCalled()} disabled={isDisable}
             className=" bg-neutral-900 text-white w-[100%] md:p-2 p-1 rounded-sm outline-none">
-                {isdisable ? <Spinner/> : content}
+                {isDisable ? <Spinner/> : content}
             </button>
         </div>
     )
