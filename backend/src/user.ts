@@ -33,6 +33,7 @@ userRoutes.use('*', async (c, next) => {
 //Routes
 
 userRoutes.post('/signup', async (c) => {
+    console.log("Hello from signup");
     const body = await c.req.json();
     const JWT_SECRET = c.env.JWT_SECRET;
     const prisma = c.get("prisma");
