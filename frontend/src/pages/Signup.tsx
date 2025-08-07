@@ -6,6 +6,7 @@ import { Heading } from "../components/Heading"
 import axios from "axios";
 import { useSetRecoilState } from "recoil"
 import { disableAtom } from "../store/atom"
+import { useNavigate } from "react-router-dom"
 const BASE_URL = import.meta.env.VITE_BACKEND_URL
 
 export function Signup(){
@@ -13,7 +14,7 @@ export function Signup(){
     const [email, setEmail] = useState<string>("");
     const [password, setPassword] = useState<string>("");
     const setDisable = useSetRecoilState(disableAtom)
-
+    const navigate = useNavigate();
 
     function signup(): void{
         
@@ -34,8 +35,11 @@ export function Signup(){
                     localStorage.setItem('jwtToken', token)
                 }
                 const msg = response.data.msg;
-                alert(msg);
+                if(msg == "User created"){
+                    navigate("/dashboard");
+                }
             }).catch(error =>{
+                setDisable(false)
                 alert(error);   
             })
     }
