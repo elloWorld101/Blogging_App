@@ -31,9 +31,11 @@ blogRoutes.use('*', async (c, next) => {
 
 //Middlewares
 
-blogRoutes.use("*", async (c, next) =>{
+blogRoutes.use("/blog/*", async (c, next) =>{
 
-  const token = c.req.header("Authorization");
+  const header = c.req.header("Authorization");
+  const token = header?.split(" ")[1];
+
   const safeToken: string = token ?? " ";
   const JWT_SECRET = c.env.JWT_SECRET;
   
@@ -46,7 +48,7 @@ blogRoutes.use("*", async (c, next) =>{
         await next();
 
     }else{
-      
+
         return c.json({
             msg: "Token not verified"
         })

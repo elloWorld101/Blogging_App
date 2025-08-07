@@ -27,13 +27,13 @@ export function Signup(){
         })
             .then(function(response){
                 setDisable(false);
-                
+
                 if(response.data.error){
                     alert(response.data.error);
                 }
                 if(response.data.token){
                     const token = response.data.token;
-                    localStorage.setItem('jwtToken', token)
+                    localStorage.setItem('jwtToken',"Bearer" + token)
                 }
                 const msg = response.data.msg;
                 if(msg == "User created"){
