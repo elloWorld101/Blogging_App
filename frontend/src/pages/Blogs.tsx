@@ -8,12 +8,12 @@ import { Logo } from "../components/Logo"
 import { Draft } from "../components/Draft"
 
 export function Blogs(){
-    const [heading, setHeading] = useState("");
-    const [content, setContent] = useState("");
+    // const [heading, setHeading] = useState("");
+    // const [content, setContent] = useState("");
 
-    function publish(){
+    // function publish(){
         
-    }
+    // }
 
 
     return(
@@ -35,7 +35,7 @@ export function Blogs(){
 
                 <div className="flex mt-[15%] md:mt-[4%] md:w-[80%] m-auto ">
                     <div className="hidden md:block md:basis-1/15"><Svg/></div>
-                    <div className="md:basis-14/15 md:border-l border-neutral-500 rounded-none w-full"><Title heading={setHeading}/></div>
+                    <div className="md:basis-14/15 md:border-l border-neutral-500 rounded-none w-full"><Title /></div>
                 </div>
 
                 <div className="md:w-[80%] m-auto flex mt-[2%] ">
