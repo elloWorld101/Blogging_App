@@ -14,7 +14,7 @@ function App() {
     <RecoilRoot>
       <Routes>
         <Route path='/' element={<Landing/>} ></Route>
-        <Route path='/api/v1/signup' element={<Signup/>}></Route>
+        <Route path='/signup' element={<Signup/>}></Route>
         <Route path='/signin' element={<Signin/>}></Route>
         <Route path='/post' element={<Blogs/>}></Route>
         <Route path='/blogs' element={<Dashboard/>}></Route>
