@@ -26,7 +26,6 @@ export function Signup(){
             password: password
         })
             .then(function(response){
-                setDisable(false);
 
                 if(response.data.error){
                     alert(response.data.error);
@@ -38,7 +37,12 @@ export function Signup(){
                 const msg = response.data.msg;
                 if(msg == "User created"){
                     navigate("/dashboard");
+                }else{
+                    alert(msg);
                 }
+
+                setDisable(false);
+
             }).catch(error =>{
                 setDisable(false)
                 alert(error);   
