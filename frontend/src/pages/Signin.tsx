@@ -7,7 +7,7 @@ import axios from "axios"
 import { useSetRecoilState } from "recoil"
 import { disableAtom } from "../store/atom"
 import { useNavigate } from "react-router-dom"
-// const BASE_URL = import.meta.env.VITE_BACKEND_URL;
+const BASE_URL = import.meta.env.VITE_BACKEND_URL;
 
 export function Signin(){
 
@@ -19,7 +19,7 @@ export function Signin(){
     function signin(): void{
         setDisable(true);
 
-        axios.post(`api/v1/signin`,{
+        axios.post(`${BASE_URL}/signin`,{
         email: email,
         password: password
         
