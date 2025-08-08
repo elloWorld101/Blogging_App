@@ -14,7 +14,7 @@ export function Landing(){
                 <div className="text-sm md:text-lg flex flex-row gap-5 md:basis-1/3 ">
                     <a href="/signin" className="hidden md:block py-2 text-sm font-semibold">Sign in</a>
                     <button className="bg-neutral-900 rounded-full text-white px-5 text-sm font-semibold mr-3 md:mx-none">
-                        <a href="/signup">Get Started</a>
+                        <a href="api/v1/signup">Get Started</a>
                     </button>
                 </div>
             </div>
