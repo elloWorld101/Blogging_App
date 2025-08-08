@@ -20,7 +20,7 @@ export function Signup(){
         
         setDisable(true);
 
-        axios.post(`${BASE_URL}/signup`, {
+        axios.post(`api/v1/signup`, {
             name: username,
             email: email,
             password: password
