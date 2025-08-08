@@ -31,10 +31,11 @@ blogRoutes.use('*', async (c, next) => {
 
 //Middlewares
 
-blogRoutes.use("/blog/*", async (c, next) =>{
+blogRoutes.use("*", async (c, next) =>{
 
   const header = c.req.header("Authorization");
   const token = header?.split(" ")[1];
+
 
   const safeToken: string = token ?? " ";
   const JWT_SECRET = c.env.JWT_SECRET;
@@ -75,11 +76,10 @@ blogRoutes.post("/blog", async (c)=>{
         throw new Error("UserId not a string")
     }
 
-    const { success } = createPostInput.safeParse(body);
-    if(!success){
-        c.status(400);
+    const result = createPostInput.safeParse(body);
+    if(!result.success){
         return c.json({
-            msg: "Wrong inputs"
+            msg: result.error.issues[0].message
         })
     }
 

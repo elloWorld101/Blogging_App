@@ -32,7 +32,7 @@ export function Signin(){
 
                 if(response.data.token){
                     const token = response.data.token;
-                    localStorage.setItem("jwtToken","Bearer"+ token);
+                    localStorage.setItem("jwtToken", token);
                 }
 
                 const msg = response.data.msg;

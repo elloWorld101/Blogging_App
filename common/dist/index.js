@@ -15,10 +15,10 @@ exports.signinInput = zod_1.default.object({
     password: zod_1.default.string()
 });
 exports.createPostInput = zod_1.default.object({
-    title: zod_1.default.string({ error: "Title required" }),
-    content: zod_1.default.string(),
+    title: zod_1.default.string().min(1, { error: "Title Required" }),
+    content: zod_1.default.string().min(1, { error: "Content Required" }),
 });
 exports.updatePostInput = zod_1.default.object({
-    title: zod_1.default.string(),
-    content: zod_1.default.string(),
+    title: zod_1.default.string().min(1, { error: "Title Required" }),
+    content: zod_1.default.string().min(1, { error: "Content Required" }),
 });

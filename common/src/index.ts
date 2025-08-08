@@ -18,15 +18,15 @@ export const signinInput = zod.object({
 export type SigninInput = zod.infer <typeof signinInput>;
 
 export const createPostInput = zod.object({
-    title: zod.string({error: "Title required"}),
-    content: zod.string(),
+    title: zod.string().min(1,{error: "Title Required"}),
+    content: zod.string().min(1, {error: "Content Required"}),
 });
 
 export type CreatePostInput = zod.infer <typeof createPostInput>;
 
 export const updatePostInput = zod.object({
-    title: zod.string(),
-    content: zod.string(),
+    title: zod.string().min(1, {error: "Title Required"}),
+    content: zod.string().min(1, {error: "Content Required"}),
 });
 
 export type updatePostInput = zod.infer <typeof updatePostInput>;
