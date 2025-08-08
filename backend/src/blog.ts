@@ -153,8 +153,7 @@ blogRoutes.put("/blog", async (c)=>{
 blogRoutes.get("/blog/bulk", async (c)=>{
     const prisma = c.get("prisma");
     try {
-
-
+        
         const posts = await prisma.post.findMany({})
         if(posts){
             return c.json({
