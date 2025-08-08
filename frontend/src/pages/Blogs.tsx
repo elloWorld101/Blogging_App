@@ -1,4 +1,3 @@
-import {useState} from "react"
 import { Svg } from "../components/Svg"
 import { Title } from "../components/Title"
 import { Subtitle } from "../components/Subtitle"
