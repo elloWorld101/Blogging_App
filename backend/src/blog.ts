@@ -114,7 +114,7 @@ blogRoutes.put("/blog", async (c)=>{
     const payload = c.get("decoded");
     const userId = payload.id;
 
-    const { success } = createPostInput.safeParse(body);
+    const { success } = updatePostInput.safeParse(body);
     if(!success){
         c.status(400);
         return c.json({
