@@ -46,7 +46,7 @@ export function Dashboard(){
 
             <div>
                 {isSkeleton ? <SkeletonCN/>: null}
-                <BlogCard title="Hello bro from title"  content="this content is passsed in the box only bruh"/>
+                <BlogCard title="I FAILED Multiple coding Interviews Until I Learned THIS"  content="After rejection after rejection, one lesson changed how I prep, think, and perform in interviews."/>
                 
             </div>
         </div>
