@@ -1,7 +1,7 @@
 import { Hono } from 'hono'
 import { PrismaClient } from '@prisma/client/edge'
 import { withAccelerate } from '@prisma/extension-accelerate'
-import { decode, sign, verify } from 'hono/jwt'
+import { verify } from 'hono/jwt'
 import { JWTPayload } from 'hono/utils/jwt/types'
 import { createPostInput, updatePostInput } from "@ritzcreates/common-app"
 
