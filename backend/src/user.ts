@@ -51,21 +51,15 @@ userRoutes.post("/signup", async (c) => {
       },
     });
 
-    if (user) {
-      const token = await sign(
-        {
-          id: user.id,
-        },
-        JWT_SECRET
-      );
+    const token = await sign({
+        id: user.id,
+      },JWT_SECRET);
 
-      if (token) {
-        return c.json({
-          msg: "User created",
-          token: token,
-        });
-      }
-    }
+      return c.json({
+        msg: "User created",
+        token: token,
+      });
+
   } catch (error) {
     return c.json({
       msg: "User not created",
