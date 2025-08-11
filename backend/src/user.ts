@@ -69,7 +69,6 @@ userRoutes.post("/signup", async (c) => {
   } catch (error) {
     return c.json({
       msg: "User not created",
-      error: error,
     });
   }
 });
