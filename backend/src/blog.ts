@@ -66,7 +66,7 @@ blogRoutes.use("*", async (c, next) =>{
 
 //Routes
 
-blogRoutes.post("/blog", async (c)=>{
+blogRoutes.post("/", async (c)=>{
     const payload = c.get("decoded");
     const userId = payload.id;
     const body = await c.req.json();
@@ -108,7 +108,7 @@ blogRoutes.post("/blog", async (c)=>{
 
 })
 
-blogRoutes.put("/blog", async (c)=>{
+blogRoutes.put("/", async (c)=>{
     const body = await c.req.json();
     const prisma = c.get("prisma");
     const payload = c.get("decoded");
@@ -150,7 +150,7 @@ blogRoutes.put("/blog", async (c)=>{
 
 })
 
-blogRoutes.get("/blog/bulk", async (c)=>{
+blogRoutes.get("/bulk", async (c)=>{
     const prisma = c.get("prisma");
     try {
         
@@ -169,7 +169,7 @@ blogRoutes.get("/blog/bulk", async (c)=>{
 
 })
 
-blogRoutes.get("/blog/:id", async (c)=>{
+blogRoutes.get("/:id", async (c)=>{
     const id = c.req.param("id");
     const prisma = c.get("prisma");
 
