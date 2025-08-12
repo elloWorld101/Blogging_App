@@ -29,7 +29,7 @@ blogRoutes.use('*', async (c, next) => {
   await next()
 })
 
-//Middlewares
+//Middlewares for Authentication
 
 blogRoutes.use("*", async (c, next) =>{
 
@@ -131,7 +131,6 @@ blogRoutes.put("/", async (c)=>{
             data: {
                 title: body.title,
                 content: body.content,
-                authorId: userId as string
             }
         })
 
