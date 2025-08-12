@@ -13,7 +13,7 @@ export type SignupInput = zod.infer <typeof signupInput>;
 export const signinInput = zod.object({
     email: zod.email({error: "Wrong Email"}),
     password: zod.string()
-});
+});  
 
 export type SigninInput = zod.infer <typeof signinInput>;
 
@@ -29,4 +29,4 @@ export const updatePostInput = zod.object({
     content: zod.string().min(1, {error: "Content Required"}),
 });
 
-export type updatePostInput = zod.infer <typeof updatePostInput>;
+export type UpdatePostInput = zod.infer <typeof updatePostInput>;
