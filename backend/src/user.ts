@@ -119,5 +119,3 @@ userRoutes.post("/signin", async (c) => {
     });
   }
 });
-
-export default userRoutes;

@@ -195,5 +195,3 @@ blogRoutes.get("/:id", async (c)=>{
   
 })
 
-
-export default blogRoutes
