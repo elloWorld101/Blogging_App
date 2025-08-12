@@ -18,5 +18,6 @@ export type CreatePostInput = zod.infer<typeof createPostInput>;
 export declare const updatePostInput: zod.ZodObject<{
     title: zod.ZodString;
     content: zod.ZodString;
+    id: zod.ZodString;
 }, zod.core.$strip>;
 export type UpdatePostInput = zod.infer<typeof updatePostInput>;

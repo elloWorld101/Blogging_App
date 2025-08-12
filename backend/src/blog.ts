@@ -111,8 +111,6 @@ blogRoutes.post("/", async (c)=>{
 blogRoutes.put("/", async (c)=>{
     const body = await c.req.json();
     const prisma = c.get("prisma");
-    const payload = c.get("decoded");
-    const userId = payload.id;
 
     const { success } = updatePostInput.safeParse(body);
     if(!success){

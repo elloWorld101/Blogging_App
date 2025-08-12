@@ -7,26 +7,29 @@ export const signupInput = zod.object({
     name: zod.string().optional()
 });
 
-export type SignupInput = zod.infer <typeof signupInput>;
-
 
 export const signinInput = zod.object({
     email: zod.email({error: "Wrong Email"}),
     password: zod.string()
 });  
 
-export type SigninInput = zod.infer <typeof signinInput>;
 
 export const createPostInput = zod.object({
     title: zod.string().min(1,{error: "Title Required"}),
     content: zod.string().min(1, {error: "Content Required"}),
 });
 
-export type CreatePostInput = zod.infer <typeof createPostInput>;
 
 export const updatePostInput = zod.object({
     title: zod.string().min(1, {error: "Title Required"}),
     content: zod.string().min(1, {error: "Content Required"}),
+    id: zod.string()
 });
 
+
+export type SignupInput = zod.infer <typeof signupInput>;
+export type SigninInput = zod.infer <typeof signinInput>;
+export type CreatePostInput = zod.infer <typeof createPostInput>;
 export type UpdatePostInput = zod.infer <typeof updatePostInput>;
+
+//yeh structured format publish karna baaki hai 
