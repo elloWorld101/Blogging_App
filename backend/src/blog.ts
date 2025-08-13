@@ -149,12 +149,25 @@ blogRoutes.put("/", async (c)=>{
 
 blogRoutes.get("/bulk", async (c)=>{
     const prisma = c.get("prisma");
+
     try {
         
-        const posts = await prisma.post.findMany({})
+        const posts = await prisma.post.findMany({
+            select: {
+                title: true,
+                content: true,
+                id: true,
+                author: {
+                    select: {
+                        name: true,
+                    }
+                }
+            }
+        })
         if(posts){
-            return c.json({
-                msg: "Posts:", posts
+            return c.json({ 
+                posts: posts,
+                
             })
         }
     } catch(error){

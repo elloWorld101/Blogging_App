@@ -9,12 +9,14 @@ import { Draft } from "../components/Draft"
 import axios from "axios"
 import { useSetRecoilState } from "recoil"
 import { disableAtom } from "../store/atom"
+import { useNavigate } from "react-router-dom"
 const BASE_URL = import.meta.env.VITE_BACKEND_URL;
 
 export function Blogs(){
     const [heading, setHeading] = useState("");
     const [content, setContent] = useState("");
     const setDisable = useSetRecoilState(disableAtom)
+    const navigate = useNavigate();
 
     function publish(){
         setDisable(true);
@@ -31,7 +33,7 @@ export function Blogs(){
             setDisable(false);
             const msg = response.data.msg;
             alert(msg);
-
+            navigate("/dashboard");
          })
          .catch(error => {
             setDisable(false);
@@ -54,7 +56,7 @@ export function Blogs(){
 
                     <div className="flex items-center gap-3">
                         <BlogButton functionCalled={publish}/>
-                        <Icon/>
+                        <Icon authorName="Rithvk"/>
                     </div>
                 </div>
 

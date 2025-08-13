@@ -1,8 +1,18 @@
+import { useEffect } from "react";
+
+
 interface SearchInputs{
     stateVariable: React.Dispatch<React.SetStateAction<string>>
 }
 
 export function Search({stateVariable}: SearchInputs){
+
+
+    useEffect(()=>{
+        
+    },[])
+
+
     return(
         <div className="flex border border-white  rounded-full items-center bg-gray-100">  
             <div className="px-4">

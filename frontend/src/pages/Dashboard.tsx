@@ -8,12 +8,25 @@ import { useRecoilState } from "recoil"
 import { skeletonAtom } from "../store/atom"
 import { SkeletonCN } from "../components/SkeletonCN"
 import { BlogCard } from "@/components/BlogCard"
+import { IconSkeleton } from "@/components/IconSkeleton"
 const BASE_URL = import.meta.env.VITE_BACKEND_URL;
 
+
+interface BlogTypes {
+    title: string;
+    content: string;
+    id: string;
+    author: {
+        name: string;
+    }
+}
+
+
 export function Dashboard(){
-    const [posts, setPosts] = useState([]);
+    const [blogs, setBlogs] = useState<BlogTypes[]>([]);
     const [search, setSearch] = useState("");
-    const [isSkeleton, setIsSkeleton] = useRecoilState(skeletonAtom)
+    const [isSkeleton, setIsSkeleton] = useRecoilState(skeletonAtom);
+    const [iconSkelton, setIconSkeleton] = useState(true);
 
     useEffect(()=>{
         axios.get(`${BASE_URL}/blog/bulk`,{
@@ -22,14 +35,16 @@ export function Dashboard(){
             }
         })
         .then(function(response){
-            setIsSkeleton(false);
-            setPosts(response.data.posts);
+            const data = response.data;
+            setIsSkeleton(false);  
+            setIconSkeleton(false);
+            setBlogs(data.posts); //bro idhar data set hogaya hai
+            
         }).catch(error =>{
             setIsSkeleton(false);
             alert(error);
         })
     },[]);
-
 
     return(
         <div>
@@ -40,14 +55,21 @@ export function Dashboard(){
                 </div>
                 <div className="flex gap-4 items-center">
                     <Write/>
-                    <Icon authorName="Rithvik"/>
+                    {iconSkelton ? <IconSkeleton/> : <Icon authorName={blogs[0].author.name} />}
                 </div>
             </div>
 
-            <div>
+            <div className="mt-20">
                 {isSkeleton ? <SkeletonCN/>: null}
-                <BlogCard title="I FAILED Multiple coding Interviews Until I Learned THIS"  content="After rejection after rejection, one lesson changed how I prep, think, and perform in interviews."
-                authorName="Rithvik B" published="Dec 3, 2023"/>
+                {blogs.map((blog)=> {
+                    return(
+                        <div className="mt-5">
+                            <BlogCard title={blog.title}  authorName={blog.author.name} content={blog.content} published="3rd Jan 2025"/>                             
+                        </div>
+                    )
+                })}
+                
+
                 
             </div>
         </div>
