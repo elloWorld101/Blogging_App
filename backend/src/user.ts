@@ -31,10 +31,11 @@ userRoutes.use("*", async (c, next) => {
 
 userRoutes.post("/signup", async (c) => {
   const body = await c.req.json();
+
   const JWT_SECRET = c.env.JWT_SECRET;
   const prisma = c.get("prisma");
 
-  const result = signupInput.safeParse(body);
+  const result = signupInput.safeParse(body.userInputs);
 
   if (!result.success) {
     return c.json({ 
@@ -45,9 +46,9 @@ userRoutes.post("/signup", async (c) => {
   try {
     const user = await prisma.user.create({
       data: {
-        email: body.email,
-        name: body.name,
-        password: body.password,
+        email: body.userInputs.email,
+        name: body.userInputs.name,
+        password: body.userInputs.password,
       },
     });
 
@@ -61,6 +62,7 @@ userRoutes.post("/signup", async (c) => {
       });
 
   } catch (error) {
+    console.log(error);
     return c.json({
       msg: "User not created",
     });
@@ -72,7 +74,7 @@ userRoutes.post("/signin", async (c) => {
   const prisma = c.get("prisma");
   const JWT_SECRET = c.env.JWT_SECRET;
 
-  const result = signinInput.safeParse(body);
+  const result = signinInput.safeParse(body.userInputs);
   
   if (!result.success) {
 
@@ -84,8 +86,8 @@ userRoutes.post("/signin", async (c) => {
   try {
     const user = await prisma.user.findUnique({
       where: {
-        email: body.email,
-        password: body.password
+        email: body.userInputs.email,
+        password: body.userInputs.password
       },
     });
 

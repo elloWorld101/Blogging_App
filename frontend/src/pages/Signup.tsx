@@ -7,23 +7,28 @@ import axios from "axios";
 import { useSetRecoilState } from "recoil"
 import { disableAtom } from "../store/atom"
 import { useNavigate } from "react-router-dom"
+import type { SignupInput } from "@ritzcreates/common-app"
 const BASE_URL = import.meta.env.VITE_BACKEND_URL
 
 export function Signup(){
-    const [username, setUsername] = useState<string>("");
-    const [email, setEmail] = useState<string>("");
-    const [password, setPassword] = useState<string>("");
+    // const [username, setUsername] = useState<string>("");
+    // const [email, setEmail] = useState<string>("");
+    // const [password, setPassword] = useState<string>("");
+    const [userInputs, setUserInputs] = useState<SignupInput>({
+        email: "",
+        name: "",
+        password: ""
+    })
     const setDisable = useSetRecoilState(disableAtom)
     const navigate = useNavigate();
 
     function signup(): void{
+        console.log(userInputs);
         
         setDisable(true);
 
-        axios.post(`${BASE_URL}/signup`, {
-            name: username,
-            email: email,
-            password: password
+        axios.post(`${BASE_URL}/user/signup`, {
+            userInputs
         })
             .then(function(response){
 
@@ -56,9 +61,24 @@ export function Signup(){
             <div className="md:basis-1/2 flex flex-col justify-center h-screen">
                 <div className=" md:w-[50%] mx-auto w-[70%]">
                     <Heading heading="Create an account" subheading="Already have an account? " link="Login" page="/signin"/>
-                    <InputBox title="Username" placeholder="Rithvik" setStateVariable = {setUsername} />
-                    <InputBox title="Email" placeholder="m@example.com" setStateVariable={setEmail} />
-                    <InputBox title="Password" placeholder="" setStateVariable={setPassword} />
+                    <InputBox title="Username" placeholder="Rithvik" functionCalled={function(e){
+                        setUserInputs({
+                            ...userInputs,
+                            name: e.target.value
+                        })
+                    }}/>
+                    <InputBox title="Email" placeholder="m@example.com" functionCalled={function(e){
+                        setUserInputs({
+                            ...userInputs,
+                            email: e.target.value
+                        })
+                    }}/>
+                    <InputBox title="Password" placeholder="" functionCalled={(e)=>{
+                        setUserInputs({
+                            ...userInputs,
+                            password: e.target.value
+                        })
+                    }} />
 
                     <Button content="Sign Up" functionCalled={signup}></Button>
                 </div>

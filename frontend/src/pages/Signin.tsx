@@ -6,22 +6,24 @@ import { Button } from "../components/Button"
 import axios from "axios"
 import { useSetRecoilState } from "recoil"
 import { disableAtom } from "../store/atom"
+import type { SigninInput } from "@ritzcreates/common-app"
 import { useNavigate } from "react-router-dom"
 const BASE_URL = import.meta.env.VITE_BACKEND_URL;
 
 export function Signin(){
 
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
+    const [userInputs, setUserInputs]  = useState<SigninInput>({
+        email: "",
+        password: ""
+    })
     const setDisable = useSetRecoilState(disableAtom);
     const navigate = useNavigate();
 
     function signin(): void{
         setDisable(true);
 
-        axios.post(`${BASE_URL}/signin`,{
-        email: email,
-        password: password
+        axios.post(`${BASE_URL}/user/signin`,{
+            userInputs
         
             }).then(function(response){
                 setDisable(false);
@@ -54,8 +56,18 @@ export function Signin(){
             <div className="md:basis-1/2 flex flex-col justify-center h-screen ">
                 <div className="md:w-[50%] mx-auto w-[70%]">
                     <Heading heading="Login to your account" subheading="Don't have an account? " page="/signup" link="Sign up"/>
-                    <InputBox title="Email" placeholder="m@example.com" setStateVariable={setEmail} />
-                    <InputBox title="Password" placeholder="" setStateVariable={setPassword}/>   
+                    <InputBox title="Email" placeholder="m@example.com" functionCalled={(e)=>{
+                        setUserInputs({
+                            ...userInputs,
+                            email: e.target.value
+                        })
+                    }} />
+                    <InputBox title="Password" placeholder="" functionCalled={function(e){
+                        setUserInputs({
+                            ...userInputs,
+                            password: e.target.value
+                        })
+                    }}/>   
                     <Button content="Sign In" functionCalled={signin}/>
                 </div>
             </div>
