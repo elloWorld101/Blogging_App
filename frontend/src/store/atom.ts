@@ -9,3 +9,4 @@ export const skeletonAtom = atom({
     key: "skeletonAtom",
     default: true
 })
+

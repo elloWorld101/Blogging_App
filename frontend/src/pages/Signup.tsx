@@ -11,9 +11,7 @@ import type { SignupInput } from "@ritzcreates/common-app"
 const BASE_URL = import.meta.env.VITE_BACKEND_URL
 
 export function Signup(){
-    // const [username, setUsername] = useState<string>("");
-    // const [email, setEmail] = useState<string>("");
-    // const [password, setPassword] = useState<string>("");
+
     const [userInputs, setUserInputs] = useState<SignupInput>({
         email: "",
         name: "",
