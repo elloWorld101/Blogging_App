@@ -9,6 +9,8 @@ import { skeletonAtom } from "../store/atom"
 import { SkeletonCN } from "../components/SkeletonCN"
 import { BlogCard } from "@/components/BlogCard"
 import { IconSkeleton } from "@/components/IconSkeleton"
+import { userAtom } from "../store/atom"
+import { useRecoilValue } from "recoil"
 const BASE_URL = import.meta.env.VITE_BACKEND_URL;
 
 
@@ -27,6 +29,8 @@ export function Dashboard(){
     const [search, setSearch] = useState("");
     const [isSkeleton, setIsSkeleton] = useRecoilState(skeletonAtom);
     const [iconSkelton, setIconSkeleton] = useState(true);
+    const holderName = useRecoilValue(userAtom);
+    // console.log(holderName);
 
     useEffect(()=>{
         axios.get(`${BASE_URL}/blog/bulk`,{
@@ -55,7 +59,7 @@ export function Dashboard(){
                 </div>
                 <div className="flex gap-4 items-center">
                     <Write/>
-                    {iconSkelton ? <IconSkeleton/> : <Icon authorName={blogs[0].author.name} />}
+                    {iconSkelton ? <IconSkeleton/> : <Icon authorName={holderName} />}
                 </div>
             </div>
 

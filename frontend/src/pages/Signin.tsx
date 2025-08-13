@@ -5,7 +5,7 @@ import { SideBar } from "../components/SideBar"
 import { Button } from "../components/Button"
 import axios from "axios"
 import { useSetRecoilState } from "recoil"
-import { disableAtom } from "../store/atom"
+import { disableAtom, userAtom } from "../store/atom"
 import type { SigninInput } from "@ritzcreates/common-app"
 import { useNavigate } from "react-router-dom"
 const BASE_URL = import.meta.env.VITE_BACKEND_URL;
@@ -17,6 +17,7 @@ export function Signin(){
         password: ""
     })
     const setDisable = useSetRecoilState(disableAtom);
+    const setHolderName = useSetRecoilState(userAtom);
     const navigate = useNavigate();
 
     function signin(): void{
@@ -35,6 +36,7 @@ export function Signin(){
                 if(response.data.token){
                     const token = response.data.token;
                     localStorage.setItem("jwtToken", token);
+                    setHolderName(response.data.holderName);
                 }
 
                 const msg = response.data.msg;

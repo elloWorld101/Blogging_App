@@ -59,6 +59,7 @@ userRoutes.post("/signup", async (c) => {
       return c.json({
         msg: "User created",
         token: token,
+        holderName: user.name || "Anonymous"
       });
 
   } catch (error) {
@@ -107,6 +108,7 @@ userRoutes.post("/signin", async (c) => {
         return c.json({
           msg: "Signin Successfull",
           token: token,
+          holderName: user.name || "Anonymous"
         });
       } else {
         return c.json({

@@ -5,10 +5,10 @@ import { SideBar } from "../components/SideBar"
 import { Heading } from "../components/Heading"
 import axios from "axios";
 import { useSetRecoilState } from "recoil"
-import { disableAtom } from "../store/atom"
+import { disableAtom, userAtom } from "../store/atom"
 import { useNavigate } from "react-router-dom"
 import type { SignupInput } from "@ritzcreates/common-app"
-const BASE_URL = import.meta.env.VITE_BACKEND_URL
+const BASE_URL = import.meta.env.VITE_BACKEND_URL;
 
 export function Signup(){
 
@@ -18,24 +18,27 @@ export function Signup(){
         password: ""
     })
     const setDisable = useSetRecoilState(disableAtom)
+    const setHolderName = useSetRecoilState(userAtom);
     const navigate = useNavigate();
 
     function signup(): void{
         console.log(userInputs);
-        
+
         setDisable(true);
 
         axios.post(`${BASE_URL}/user/signup`, {
             userInputs
         })
             .then(function(response){
-
+                console.log(response.data);
                 if(response.data.error){
                     alert(response.data.error);
                 }
                 if(response.data.token){
                     const token = response.data.token;
                     localStorage.setItem('jwtToken', token)
+                    console.log(response.data.holderName);
+                    setHolderName(response.data.holderName);
                 }
                 const msg = response.data.msg;
                 if(msg == "User created"){
