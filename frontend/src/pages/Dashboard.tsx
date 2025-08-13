@@ -40,13 +40,14 @@ export function Dashboard(){
                 </div>
                 <div className="flex gap-4 items-center">
                     <Write/>
-                    <Icon/>
+                    <Icon authorName="Rithvik"/>
                 </div>
             </div>
 
             <div>
                 {isSkeleton ? <SkeletonCN/>: null}
-                <BlogCard title="I FAILED Multiple coding Interviews Until I Learned THIS"  content="After rejection after rejection, one lesson changed how I prep, think, and perform in interviews."/>
+                <BlogCard title="I FAILED Multiple coding Interviews Until I Learned THIS"  content="After rejection after rejection, one lesson changed how I prep, think, and perform in interviews."
+                authorName="Rithvik B" published="Dec 3, 2023"/>
                 
             </div>
         </div>

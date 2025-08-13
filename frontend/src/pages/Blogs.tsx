@@ -71,6 +71,10 @@ export function Blogs(){
                 </div>
 
             </div>
+
+            <div>
+                
+            </div>
         </div>
     )
 }
