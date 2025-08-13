@@ -62,7 +62,7 @@ export function Signin(){
                             email: e.target.value
                         })
                     }} />
-                    <InputBox title="Password" placeholder="" functionCalled={function(e){
+                    <InputBox title="Password" placeholder="" type="password" functionCalled={function(e){
                         setUserInputs({
                             ...userInputs,
                             password: e.target.value
