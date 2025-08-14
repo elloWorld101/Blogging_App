@@ -9,7 +9,7 @@ export function Title({heading}: TitleInputs){
                 const value = e.target.value;
                 heading(value);
             }} 
-            className="text-4xl outline-0 w-full caret-gray-500 placeholder:text-gray-500 resize-none whitespace-normal "/>
+            className="text-4xl outline-0 w-full caret-gray-500 placeholder:text-gray-500 resize-none whitespace-normal h-[10%]"/>
         </div>
     )
 }
