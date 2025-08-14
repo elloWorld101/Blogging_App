@@ -4,6 +4,7 @@ import { Signup } from './pages/Signup'
 import { Landing } from './pages/Landing'
 import { Blogs } from './pages/Blogs'
 import { Dashboard } from './pages/Dashboard'
+import { SingleBlog } from './pages/SingleBlog'
 import { RecoilRoot } from 'recoil'
 
 
@@ -18,6 +19,7 @@ function App() {
         <Route path='/signin' element={<Signin/>}></Route>
         <Route path='/post' element={<Blogs/>}></Route>
         <Route path='/dashboard' element={<Dashboard/>}></Route>
+        <Route path='/blog' element={<SingleBlog/>}></Route>
       </Routes>
     </RecoilRoot>
     </BrowserRouter>

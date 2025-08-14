@@ -187,12 +187,20 @@ blogRoutes.get("/:id", async (c)=>{
         const specificRoute = await prisma.post.findUnique({
             where:{
                 id: id
+            }, select: {
+                title: true,
+                content: true,
+                author: {
+                    select: {
+                        name: true
+                    }
+                }
             }
         })
 
         if(specificRoute){
             return c.json({
-                msg: "Post:", specificRoute
+                blog: specificRoute
             })
         }
 

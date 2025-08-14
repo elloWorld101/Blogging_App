@@ -5,12 +5,26 @@ interface SearchInputs{
     stateVariable: React.Dispatch<React.SetStateAction<string>>
 }
 
+interface DebounceInputs{
+    value: string;
+    timer: number;
+}
+
 export function Search({stateVariable}: SearchInputs){
 
+    function debounce(value, delay) {
+        let timer = delay;
 
-    useEffect(()=>{
-        
-    },[])
+        useEffect(()=>{
+            setTimeout(()=>{
+                timer = stateVariable(value)
+            },delay)
+
+            return (
+                clearTimeout(timer)
+            )
+        },[value]);
+    }
 
 
     return(
@@ -21,7 +35,7 @@ export function Search({stateVariable}: SearchInputs){
             </div> 
             <div>
                 <input type="text" placeholder="Search" onChange={function(e){
-                    stateVariable(e.target.value);
+                    debounce(e.target.value, 500);
                 }}
                 className="outline-0 text-sm placeholder:text-gray-800 placeholder:font-roboto placeholder:font-300]"/>
             </div>

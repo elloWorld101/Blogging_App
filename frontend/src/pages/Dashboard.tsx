@@ -11,6 +11,7 @@ import { BlogCard } from "@/components/BlogCard"
 import { IconSkeleton } from "@/components/IconSkeleton"
 import { userAtom } from "../store/atom"
 import { useRecoilValue } from "recoil"
+import { Link } from "react-router-dom"
 const BASE_URL = import.meta.env.VITE_BACKEND_URL;
 
 
@@ -30,7 +31,6 @@ export function Dashboard(){
     const [isSkeleton, setIsSkeleton] = useRecoilState(skeletonAtom);
     const [iconSkelton, setIconSkeleton] = useState(true);
     const holderName = useRecoilValue(userAtom);
-    // console.log(holderName);
 
     useEffect(()=>{
         axios.get(`${BASE_URL}/blog/bulk`,{
@@ -48,7 +48,7 @@ export function Dashboard(){
             setIsSkeleton(false);
             alert(error);
         })
-    },[]);
+    },[search]);    
 
     return(
         <div>
@@ -59,7 +59,7 @@ export function Dashboard(){
                 </div>
                 <div className="flex gap-4 items-center">
                     <Write/>
-                    {iconSkelton ? <IconSkeleton/> : <Icon authorName={holderName} />}
+                    {iconSkelton ? <IconSkeleton/> : <Icon authorName={holderName || "Anonymous"} />}
                 </div>
             </div>
 
@@ -67,9 +67,11 @@ export function Dashboard(){
                 {isSkeleton ? <SkeletonCN/>: null}
                 {blogs.map((blog)=> {
                     return(
+                        <Link to="/blog" state={{id: blog.id, holderName: holderName, authorName: blog.author.name}}>
                         <div className="mt-5">
-                            <BlogCard title={blog.title}  authorName={blog.author.name} content={blog.content} published="3rd Jan 2025"/>                             
+                            <BlogCard title={blog.title} authorName={blog.author.name || "Anonymous"} content={blog.content} />                             
                         </div>
+                        </Link>
                     )
                 })}
                 
