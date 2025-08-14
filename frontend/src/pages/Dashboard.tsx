@@ -49,20 +49,20 @@ export function Dashboard() {
       });
   }, [search]);
 
-  function useDebounce(value: string, delay: number) {
-    let timer;
+  // function useDebounce(value: string, delay: number) {
+  //   let timer;
 
-    useEffect(() => {
-      timer = setTimeout(() => {
-        console.log("Hello");
-        setSearch(value);
-      }, delay);
+  //   useEffect(() => {
+  //     timer = setTimeout(() => {
+  //       console.log("Hello");
+  //       setSearch(value);
+  //     }, delay);
 
-      return clearTimeout(timer);
-    }, [value]);
-  }
+  //     return clearTimeout(timer);
+  //   }, [value]);
+  // }
 
-  const debounced = useDebounce(search, 500);
+  // const debounced = useDebounce(search, 500);
 
   return (
     <div>
