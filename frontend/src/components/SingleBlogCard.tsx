@@ -24,7 +24,7 @@ export function SingleBlogCard({authorName, title, content}: SingleBlogCardTypes
                     <h2>{title}</h2>
                 </div>
 
-                <div className="font-[500] text-gray-500 font-roboto mt-3 text-2xl">
+                <div className="font-[500] text-gray-500 font-roboto mt-10 text-2xl">
                     <p>{content.length > 100 ? content.slice(0,100) + "..." : content.slice(0,100)}</p>
                 </div>
     

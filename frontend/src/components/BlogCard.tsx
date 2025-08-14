@@ -7,6 +7,8 @@ interface BlogCardTypes{
 }
 
 export function BlogCard({authorName, title, content}: BlogCardTypes){
+
+    
     return(
 
         <div className="flex justify-center">

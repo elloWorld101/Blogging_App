@@ -74,8 +74,6 @@ userRoutes.post("/signin", async (c) => {
   const body = await c.req.json();
   const prisma = c.get("prisma");
   const JWT_SECRET = c.env.JWT_SECRET;
-  console.log("Inside backend");
-  console.log(body);
 
   const result = signinInput.safeParse(body.userInputs);
   
@@ -87,14 +85,12 @@ userRoutes.post("/signin", async (c) => {
   }
 
   try {
-    console.log("Inside try");
     const user = await prisma.user.findUnique({
       where: {
         email: body.userInputs.email,
         password: body.userInputs.password
       },
     });
-    console.log("After find");
 
     if (user) {
       const token = await sign(

@@ -7,6 +7,8 @@ import axios from "axios"
 import { useState , useEffect } from "react";
 const BASE_URL = import.meta.env.VITE_BACKEND_URL;
 import { useLocation } from "react-router-dom";
+import { BlogCardSkeleton } from "@/components/BlogCardSkeleton";
+
 
 interface BlogTypes {
     title: string;
@@ -17,6 +19,8 @@ interface BlogTypes {
 }
 
 export function SingleBlog(){
+
+
     const {state}= useLocation();
     const [blog, setBlog] = useState<BlogTypes>({
         title: " ",
@@ -26,6 +30,7 @@ export function SingleBlog(){
         }
     });
     const [iconSkelton, setIconSkeleton] = useState(true);
+    const [skeleton, setSkeleton] = useState(true);
     const holderName = state.holderName;
     const authorName = state.authorName;
 
@@ -41,7 +46,7 @@ export function SingleBlog(){
             });
             console.log(response.data.blog);
             setBlog(response.data.blog)
-            
+            setSkeleton(false);
             setIconSkeleton(false);
 
         }
@@ -63,7 +68,7 @@ export function SingleBlog(){
             </div>
 
             <div>
-                <SingleBlogCard authorName={authorName || "Anonymous"} title={blog.title} content={blog.content}/>
+                {skeleton ? <BlogCardSkeleton/>: <SingleBlogCard authorName={authorName || "Anonymous"} title={blog.title} content={blog.content}/>}
             </div>
        </div>
     )
