@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Logo } from "../components/Logo";
-import { Search } from "../components/Search";
+// import { Search } from "../components/Search";
 import { Icon } from "../components/Icon";
 import { Write } from "../components/Write";
 import axios from "axios";
@@ -26,7 +26,7 @@ interface BlogTypes {
 
 export function Dashboard() {
   const [blogs, setBlogs] = useState<BlogTypes[]>([]);
-  const [search, setSearch] = useState(" ");
+  // const [search, setSearch] = useState(" ");
   const [isSkeleton, setIsSkeleton] = useRecoilState(skeletonAtom);
   const [iconSkelton, setIconSkeleton] = useState(true);
   const holderName = useRecoilValue(userAtom);
@@ -47,7 +47,7 @@ export function Dashboard() {
         setIsSkeleton(false);
         alert(error);
       });
-  }, [search]);
+  }, []); //search 
 
   // function useDebounce(value: string, delay: number) {
   //   let timer;
