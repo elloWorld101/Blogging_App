@@ -1,30 +1,11 @@
-import { useEffect } from "react";
-
 
 interface SearchInputs{
-    stateVariable: React.Dispatch<React.SetStateAction<string>>
+    functionCalled: void;
+    setter: React.Dispatch<React.SetStateAction<string>>
 }
 
-interface DebounceInputs{
-    value: string;
-    timer: number;
-}
 
-export function Search({stateVariable}: SearchInputs){
-
-    function debounce(value, delay) {
-        let timer = delay;
-
-        useEffect(()=>{
-            setTimeout(()=>{
-                timer = stateVariable(value)
-            },delay)
-
-            return (
-                clearTimeout(timer)
-            )
-        },[value]);
-    }
+export function Search({functionCalled, setter}: SearchInputs){
 
 
     return(
@@ -34,8 +15,11 @@ export function Search({stateVariable}: SearchInputs){
                 <path d="M15.853 16.56c-1.683 1.517-3.911 2.44-6.353 2.44-5.243 0-9.5-4.257-9.5-9.5s4.257-9.5 9.5-9.5 9.5 4.257 9.5 9.5c0 2.442-.923 4.67-2.44 6.353l7.44 7.44-.707.707-7.44-7.44zm-6.353-15.56c4.691 0 8.5 3.809 8.5 8.5s-3.809 8.5-8.5 8.5-8.5-3.809-8.5-8.5 3.809-8.5 8.5-8.5z"/></svg>
             </div> 
             <div>
-                <input type="text" placeholder="Search" onChange={function(e){
-                    debounce(e.target.value, 500);
+                <input type="text" placeholder="Search" onChange={(e) => {
+                    const value = e.target.value;
+                    setter(value);
+                    functionCalled
+
                 }}
                 className="outline-0 text-sm placeholder:text-gray-800 placeholder:font-roboto placeholder:font-300]"/>
             </div>

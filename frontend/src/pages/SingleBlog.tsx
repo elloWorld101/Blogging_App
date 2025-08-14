@@ -34,8 +34,6 @@ export function SingleBlog(){
     const holderName = state.holderName;
     const authorName = state.authorName;
 
-    console.log(state);
-
     useEffect(()=>{
         const getBlog = async ()=>{
 
@@ -44,7 +42,6 @@ export function SingleBlog(){
                     Authorization: "Bearer " + localStorage.getItem('jwtToken')
                 }
             });
-            console.log(response.data.blog);
             setBlog(response.data.blog)
             setSkeleton(false);
             setIconSkeleton(false);
@@ -53,7 +50,6 @@ export function SingleBlog(){
 
         getBlog();
     },[]);
-    console.log(blog);
     
     return(
         <div>
